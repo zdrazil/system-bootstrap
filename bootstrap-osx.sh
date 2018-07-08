@@ -251,7 +251,7 @@ config config status.showUntrackedFiles no
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-git clone https://github.com/zsh-users/zsh-history-substring-search .zsh/packages/zsh-history-substring-search
+git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/packages/zsh-history-substring-search
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/packages/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-completions ~/.zsh/packages/zsh-completions
 
