@@ -21,19 +21,26 @@ PACKAGES=(
 	ack
 	autojump
 	cmake
+	ctags
+	coreutils
 	dos2unix
 	fasd
+	findutils
 	fish
 	fzf
 	gcc
 	git
+	gnu-sed
+	grep
 	grep
 	haskell-stack
 	highlight
 	htop
+	moreutils
 	mpv
 	ncdu
 	node
+	p7zip
 	pwgen
 	python
 	python3
@@ -48,16 +55,10 @@ PACKAGES=(
 	trash
 	tree
 	unrar
-	vim
+	vim --with-gettext --with-lua --with-tcl
 	wakeonlan
 	wget
 	youtube-dl
-	moreutils
-	findutils
-	gnu-sed
-	coreutils
-	grep
-	p7zip
 	zplug
 )
 
