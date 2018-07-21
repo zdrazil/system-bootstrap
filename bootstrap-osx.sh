@@ -25,6 +25,7 @@ PACKAGES=(
 	coreutils
 	dos2unix
 	fasd
+	fd
 	findutils
 	fish
 	fzf
@@ -32,10 +33,11 @@ PACKAGES=(
 	git
 	gnu-sed
 	grep
-	grep
 	haskell-stack
 	highlight
 	htop
+	httpie
+	jq
 	moreutils
 	mpv
 	ncdu
@@ -52,10 +54,12 @@ PACKAGES=(
 	speedtest-completion
 	the_silver_searcher
 	tig
+	tokei
 	trash
 	tree
+	una
 	unrar
-	vim --with-gettext --with-lua --with-tcl
+	'vim --with-gettext --with-lua --with-tcl'
 	wakeonlan
 	wget
 	youtube-dl
