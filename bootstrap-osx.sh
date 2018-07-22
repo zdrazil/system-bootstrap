@@ -54,6 +54,7 @@ PACKAGES=(
 	speedtest-completion
 	the_silver_searcher
 	tig
+	tldr
 	tokei
 	trash
 	tree
@@ -80,15 +81,14 @@ CASKS=(
 	bbedit
 	bettertouchtool
 	calibre
-	caskroom/versions/firefoxdeveloperedition
+	caskroom/versions/firefox-developer-edition
 	dash
 	db-browser-for-sqlite
-	diffmerge
 	disk-inventory-x
 	dropbox
 	emacs
+	filebot
 	filezilla
-	firefox
 	firefox
 	flux
 	get-lyrical
@@ -97,21 +97,22 @@ CASKS=(
 	google-chrome
 	handbrake
 	imageoptim
+	intellij-idea-ce
 	iterm2
 	java
-	jetbrains-toolbox
 	jubler
 	karabiner-elements
 	kdiff3
+	keka
 	keepassxc
 	keycastr
 	libreoffice
-	macvim
 	macvim
 	mpv
 	music-manager
 	musicbrainz-picard
 	origin
+	pycharm-ce
 	skim
 	skype
 	slack
@@ -120,8 +121,8 @@ CASKS=(
 	spotify
 	steam
 	sublime-text
+	subsmarine
 	textual
-	the-unarchiver
 	thunderbird
 	toggl
 	transmission
@@ -132,6 +133,7 @@ CASKS=(
 	vlc
 	vmware-fusion
 	wakeonlan
+	webstorm
 )
 
 echo "Installing cask apps..."
