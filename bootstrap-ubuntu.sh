@@ -4,8 +4,6 @@
 
 echo "Starting bootstrapping"
 
-
-
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -22,6 +20,7 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 REPOSITORIES=(
 	'ppa:ubuntu-desktop/ubuntu-make'
 	'ppa:linrunner/tlp'
+	'ppa:papirus/papirus'
 )
 
 for repo in ${REPOSITORIES}; do
@@ -39,6 +38,7 @@ PACKAGES=(
 	ubuntu-make
 	ack
 	autojump
+	arc-theme
 	cmake
 	coreutils
 	curl
@@ -62,6 +62,7 @@ PACKAGES=(
 	nodejs
 	p7zip-full
 	p7zip-rar
+	papirus-icon-theme
 	pwgen
 	python3
 	ranger
@@ -136,17 +137,21 @@ done
 umake android
 umake web firefox-dev
 
+echo "Installing nix and packages..."
+bash <(curl https://nixos.org/nix/install)
+
+NIX_PACKAGES=(
+	ripgrep
+	fd
+	tldr
+	shfmt
+)	
+
+nix-env -i "${NIX_PACKAGES[@]}"
+
 echo "Installing manual apps..."
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-
-go get -u github.com/mvdan/sh/cmd/shfmtcurl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
-
-curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
-sudo dpkg -i ripgrep_0.8.1_amd64.deb
-
-sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-sudo chmod a+rx /usr/local/bin/youtube-dl
 
 echo "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
