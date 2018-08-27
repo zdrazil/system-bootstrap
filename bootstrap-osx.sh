@@ -29,7 +29,6 @@ PACKAGES=(
 	findutils
 	fish
 	fzf
-	gcc
 	git
 	gnu-sed
 	grep
@@ -77,10 +76,12 @@ CASKS=(
 	alfred
 	android-file-transfer
 	appcleaner
+	applepi-baker
 	bbedit
 	bettertouchtool
 	calibre
 	caskroom/versions/firefox-developer-edition
+	catch
 	dash
 	db-browser-for-sqlite
 	disk-inventory-x
@@ -90,12 +91,14 @@ CASKS=(
 	filezilla
 	firefox
 	flux
+	freac
 	get-lyrical
 	gog-galaxy
 	google-backup-and-sync
 	google-chrome
 	handbrake
 	imageoptim
+	inkscape
 	intellij-idea-ce
 	iterm2
 	java
@@ -106,12 +109,20 @@ CASKS=(
 	keepassxc
 	keycastr
 	libreoffice
+	lyricfier
 	macvim
 	mpv
 	music-manager
 	musicbrainz-picard
+	namebench
+	openrefine
 	origin
+	playonmac
+	plex-media-server
+	poedit
 	pycharm-ce
+	rstudio
+	scummvm
 	skim
 	skype
 	slack
@@ -119,6 +130,7 @@ CASKS=(
 	spectacle
 	spotify
 	steam
+	subler
 	sublime-text
 	subsmarine
 	textual
@@ -126,6 +138,7 @@ CASKS=(
 	toggl
 	transmission
 	usb-overdrive
+	veertu
 	veracrypt
 	virtualbox
 	visual-studio-code
@@ -133,6 +146,7 @@ CASKS=(
 	vmware-fusion
 	wakeonlan
 	webstorm
+	yacreader
 )
 
 echo "Installing cask apps..."
