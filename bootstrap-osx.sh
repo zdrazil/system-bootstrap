@@ -51,14 +51,13 @@ PACKAGES=(
 	ripgrep
 	shellcheck
 	shfmt
-	speedtest-completion
+	speedtest-cli
 	the_silver_searcher
 	tig
 	tldr
 	tokei
 	trash
 	tree
-	una
 	unrar
 	'vim --with-gettext --with-lua --with-tcl'
 	wakeonlan
