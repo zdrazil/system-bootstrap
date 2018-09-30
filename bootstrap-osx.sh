@@ -96,8 +96,10 @@ CASKS=(
 	gog-galaxy
 	google-backup-and-sync
 	google-chrome
+	grandperspective
 	handbrake
 	imageoptim
+	iina
 	inkscape
 	intellij-idea-ce
 	iterm2
@@ -111,9 +113,9 @@ CASKS=(
 	libreoffice
 	lyricfier
 	macvim
-	mpv
 	music-manager
 	musicbrainz-picard
+	nightowl
 	namebench
 	openrefine
 	origin
@@ -123,6 +125,7 @@ CASKS=(
 	pycharm-ce
 	rstudio
 	scummvm
+	shifty
 	skim
 	skype
 	slack
@@ -138,7 +141,6 @@ CASKS=(
 	toggl
 	transmission
 	usb-overdrive
-	veertu
 	veracrypt
 	virtualbox
 	visual-studio-code
