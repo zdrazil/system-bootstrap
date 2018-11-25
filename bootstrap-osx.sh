@@ -124,6 +124,7 @@ CASKS=(
 	poedit
 	pycharm-ce
 	rstudio
+	scroll-reverser
 	scummvm
 	shifty
 	skim
