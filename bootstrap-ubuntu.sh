@@ -135,7 +135,7 @@ for snaprepo in ${SNAP_APPS}; do
 done
 
 umake android
-umake web firefox-dev
+umake web firefox-dev --lang en-US
 
 echo "Installing nix and packages..."
 bash <(curl https://nixos.org/nix/install)
@@ -166,6 +166,8 @@ NPM_PACKAGES=(
 	stylelint-order
 	svgo
 	yarn
+	typescript
+	typescript-language-server
 )
 sudo npm install -g "${NPM_PACKAGES[@]}"
 
