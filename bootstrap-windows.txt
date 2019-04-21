@@ -1,0 +1,60 @@
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+ 
+choco install -y 7zip googlechrome keepassxc dropbox firefox firefox-dev --pre git cmder google-backup-and-sync
+
+choco install -y apple_airport_utility calibre fraps gamesavemanager gitbash goggalaxy  handbrake filebot filezilla freac windirstat imageoptimizer inkscape gimp jre8 jubler kdiff3 vlc libreoffice picard namebench openrefine origin steam poedit scummvm skype microsoft-teams slack sourcetree spotify sublimetext3 thunderbird toggl transmission veracrypt virtualbox vscode yacreader uplay vim notepadplusplus.install adobereader infrarecorder itunes paint.net python tightvnc winmerge irfanview putty.install winscp wincdemu androidstudio
+
+
+Install-Module PSReadLine
+PowerShellGet\Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
+
+
+https://www.clickmonitorddc.bplaced.net/
+https://github.com/coreybutler/nvm-windows/releases
+https://visualstudio.microsoft.com
+
+Git-bash
+ssh-keygen -t rsa -b 4096 -C "mail@vzdrazil.com"
+eval $(ssh-agent)
+clip < ~/.ssh/id_rsa.pub
+
+sudo apt-get install build-essential
+brew install gcc
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+
+cp -R /mnt/c/Users/zdrazil/.ssh/ ~/.ssh/
+
+sudo apt-get install xclip
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+chmod 700 ~/.ssh
+chmod 644 ~/.ssh/authorized_keys
+chmod 644 ~/.ssh/known_hosts
+chmod 644 ~/.ssh/config
+chmod 600 ~/.ssh/id_rsa
+chmod 644 ~/.ssh/id_rsa.pub
+
+NIX_PACKAGES=(
+	ripgrep
+	fd
+	tldr
+	shfmt
+	vim
+)	
+
+brew install "${NIX_PACKAGES[@]}"
+
+sudo chown -R $USER ~/.cache
+
+sudo apt-get install dbus-x11 gnome-terminal
+sudo service dbus start
+DISPLAY=:0 gnome-terminal
+
+
+~/.profile
