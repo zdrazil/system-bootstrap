@@ -12,148 +12,9 @@ fi
 
 # Update homebrew recipes
 brew update
+brew bundle --global
 
-PACKAGES=(
-	bash
-	bash-completion
-	zsh
-	zsh-completions
-	ack
-	autojump
-	cmake
-	ctags
-	coreutils
-	dos2unix
-	fasd
-	fd
-	findutils
-	fish
-	fzf
-	git
-	gnu-sed
-	grep
-	haskell-stack
-	highlight
-	htop
-	httpie
-	jq
-	moreutils
-	mpv
-	ncdu
-	node
-	p7zip
-	pwgen
-	python
-	python3
-	ranger
-	readline
-	ripgrep
-	shellcheck
-	shfmt
-	speedtest-cli
-	the_silver_searcher
-	tig
-	tldr
-	tokei
-	trash
-	tree
-	unrar
-	'vim --with-gettext --with-lua --with-tcl'
-	wakeonlan
-	wget
-	youtube-dl
-	zplug
-)
-
-echo "Installing packages..."
-brew install "${PACKAGES[@]}"
-
-echo "Cleaning up..."
 brew cleanup
-
-CASKS=(
-	air-video-server-hd
-	alfred
-	android-file-transfer
-	appcleaner
-	applepi-baker
-	bbedit
-	bettertouchtool
-	calibre
-	caskroom/versions/firefox-developer-edition
-	catch
-	dash
-	db-browser-for-sqlite
-	disk-inventory-x
-	dropbox
-	emacs
-	filebot
-	filezilla
-	firefox
-	flux
-	freac
-	get-lyrical
-	gog-galaxy
-	google-backup-and-sync
-	google-chrome
-	grandperspective
-	handbrake
-	imageoptim
-	iina
-	inkscape
-	intellij-idea-ce
-	iterm2
-	java
-	jubler
-	karabiner-elements
-	kdiff3
-	keka
-	keepassxc
-	keycastr
-	libreoffice
-	lyricfier
-	macvim
-	music-manager
-	musicbrainz-picard
-	nightowl
-	namebench
-	openrefine
-	origin
-	playonmac
-	plex-media-server
-	poedit
-	pycharm-ce
-	rstudio
-	scroll-reverser
-	scummvm
-	shifty
-	skim
-	skype
-	slack
-	sourcetree
-	spectacle
-	spotify
-	steam
-	subler
-	sublime-text
-	subsmarine
-	textual
-	thunderbird
-	toggl
-	transmission
-	usb-overdrive
-	veracrypt
-	virtualbox
-	visual-studio-code
-	vlc
-	vmware-fusion
-	wakeonlan
-	webstorm
-	yacreader
-)
-
-echo "Installing cask apps..."
-brew cask install "${CASKS[@]}"
 
 echo "Installing global npm packages..."
 NPM_PACKAGES=(
@@ -253,7 +114,7 @@ defaults write org.m0k.transmission EncryptionPrefer -bool true
 
 echo "Download dot files..."
 
-git clone --bare git@bitbucket.org:zdrazil/my-preferences.git "$HOME/.cfg"
+git clone --bare git@github.com:zdrazil/my-preferences.git "$HOME/.cfg"
 
 function config() {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
