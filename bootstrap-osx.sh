@@ -89,51 +89,23 @@ defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Set up Terminal
-defaults write com.apple.Terminal Shell "/usr/local/bin/zsh"
+defaults write com.apple.Terminal Shell "/usr/local/bin/fish"
 
 # Spectacle.app
 # Set up my preferred keyboard shortcuts
 cp -r init/spectacle.json ~/Library/Application\ Support/Spectacle/Shortcuts.json 2>/dev/null
 
-# Transmission
-defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Library/Application Support/Incomplete Torrents"
-defaults write org.m0k.transmission DownloadLocationConstant -bool true
-defaults write org.m0k.transmission DownloadFolder -string "${HOME}/Torrents"
-defaults write org.m0k.transmission DownloadAsk -bool false
-defaults write org.m0k.transmission MagnetOpenAsk -bool false
-defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
-defaults write org.m0k.transmission BlocklistNew -bool true
-defaults write org.m0k.transmission BlocklistURL -string "http://john.bitsurge.net/public/biglist.p2p.gz"
-defaults write org.m0k.trasmission BlocklistAutoUpdate -bool true
-defaults write org.m0k.transmission DownloadLimit -int 1500
-defaults write org.m0k.transmission UploadLimit -int 0
-defaults write org.m0k.transmission SpeedLimitUploadLimit -int 0
-defaults write org.m0k.transmission SpeedLimitDownloadLimit -int 700
-defaults write org.m0k.transmission EncryptionPrefer -bool true
-
 echo "Download dot files..."
+bash ./dotfiles.sh
 
-git clone --bare git@github.com:zdrazil/my-preferences.git "$HOME/.cfg"
-
-function config() {
-	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
-}
-config checkout
-exit_status=$?
-
-if [ $exit_status = 0 ]; then
-	echo "Checked out config."
-else
-	echo "Backing up pre-existing dot files."
-	mkdir -p "$HOME/.config-backup"
-	config checkout 2>&1 | grep -E "\\s+\\." | awk '{print $1}' | xargs -I{} mv {} "$HOME/.config-backup/"{}
-fi
-config checkout
-config config status.showUntrackedFiles no
+echo "Download plugins and plugin managers..."
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
 git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/packages/zsh-history-substring-search
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/packages/zsh-autosuggestions

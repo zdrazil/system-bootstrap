@@ -1,203 +1,91 @@
 #!/usr/bin/env bash
 #
-# Bootstrap script for setting up a new OSX machine
+# Bootstrap script for setting up a new Ubuntu machine - CLI
 
 echo "Starting bootstrapping"
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-
-
-REPOSITORIES=(
-	'ppa:ubuntu-desktop/ubuntu-make'
-	'ppa:linrunner/tlp'
-	'ppa:papirus/papirus'
-)
-
-for repo in ${REPOSITORIES}; do
-	sudo add-apt-repository ${repo}
-done
+echo "Adding package sources and installing software"
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 # Update package database
 sudo apt update
 
+PACKAGES_MAKE=(
+	cmake
+	g++
+	gcc
+	make
+	tlp 
+	tlp-rdw 
+)
+
 PACKAGES=(
+	ack
 	bash
 	bash-completion
-	zsh
-	snapd
-	ubuntu-make
-	ack
-	autojump
-	arc-theme
-	cmake
 	coreutils
 	curl
 	dos2unix
-	exuberant-ctags
-	fasd
+	gnupg2
 	findutils
 	fish
-	g++
-	gcc
-	git
-	golang-go
 	grep
-	haskell-stack
-	highlight
-	htop
-	make
 	moreutils
-	mpv
-	ncdu
 	nodejs
 	p7zip-full
 	p7zip-rar
-	papirus-icon-theme
 	pwgen
-	python3
-	ranger
 	sed
-	shellcheck
-	speedtest-cli
-	silversearcher-ag
-	tig
-	tlp 
-	tlp-rdw 
+	snapd
 	trash-cli
 	tree
 	unrar
 	vim
 	wakeonlan
 	wget
+	xclip
 	zplug
+	zsh
+)
+
+PACKAGES_SERVER=(
+	fail2ban
 )
 
 echo "Installing packages..."
 sudo apt install "${PACKAGES[@]}"
-
-
-GUI_PACKAGES=(
-	baobab
-	calibre
-	code
-	curl
-	default-jre
-	emacs
-	filezilla
-	firefox
-	google-chrome-stable
-	chromium-browser
-	handbrake
-	kdiff3
-	keepassxc
-	libreoffice
-	meld
-	mpv
-	nautilus-dropbox
-	picard
-	steam
-	sublime-text
-	thunderbird
-	transmission
-	trimage
-	vim-gnome
-	virtualbox
-	vlc
-	zeal	
-)
-
-echo "Installing gui apps..."
-sudo apt install "${GUI_PACKAGES[@]}"
+sudo apt install "${PACKAGES_MAKE[@]}"
+sudo apt install "${PACKAGES_SERVER[@]}"
 
 echo "Cleaning up..."
-sudo apt-get cleanup
+sudo apt-get clean
 
-sudo snap install webstorm --classic
-sudo snap install pycharm-community --classic
-sudo snap install intellij-idea-community --classic
+# Server
+systemctl start fail2ban
+systemctl enable fail2ban
 
-SNAP_APPS=(
-	spotify
-)
+echo "Installing Nix"
+curl -L https://nixos.org/nix/install | sh
 
-for snaprepo in ${SNAP_APPS}; do
-	sudo snap install ${snaprepo}
-done
+echo "Changing shell to fish..."
 
-umake android
-umake web firefox-dev --lang en-US
-
-echo "Installing nix and packages..."
-bash <(curl https://nixos.org/nix/install)
-
-NIX_PACKAGES=(
-	ripgrep
-	fd
-	tldr
-	shfmt
-)	
-
-nix-env -i "${NIX_PACKAGES[@]}"
-
-echo "Installing manual apps..."
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
-
-echo "Installing nvm..."
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-
-echo "Installing global npm packages..."
-NPM_PACKAGES=(
-	eslint
-	flow-bin
-	prettier
-	ramda-suggest
-	stylelint
-	stylelint-order
-	svgo
-	yarn
-	typescript
-	typescript-language-server
-)
-sudo npm install -g "${NPM_PACKAGES[@]}"
-
-echo "Configuring Ubuntu..."
-command -v zsh | sudo tee -a /etc/shells
-sudo chsh -s "$(command -v zsh)" "${USER}"
-
+command -v fish | sudo tee -a /etc/shells
+sudo chsh -s "$(command -v fish)" "${USER}"
 
 echo "Download dot files..."
 
-git clone --bare git@bitbucket.org:zdrazil/my-preferences.git "$HOME/.cfg"
+bash ./dotfiles.sh
 
-function config() {
-	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
-}
-config checkout
-exit_status=$?
+echo "Installing nix packages"
+nix-env -i -f .nix-packages.nix
 
-if [ $exit_status = 0 ]; then
-	echo "Checked out config."
-else
-	echo "Backing up pre-existing dot files."
-	mkdir -p "$HOME/.config-backup"
-	config checkout 2>&1 | grep -E "\\s+\\." | awk '{print $1}' | xargs -I{} mv {} "$HOME/.config-backup/"{}
-	config checkout
-fi
-config config status.showUntrackedFiles no
+echo "Download plugins and plugin managers..."
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
 git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/packages/zsh-history-substring-search
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/packages/zsh-autosuggestions
