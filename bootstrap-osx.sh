@@ -110,7 +110,7 @@ chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 ## Dock, Dashboard
 
 # Increase window resize speed for Cocoa applications
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.1
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.01
 
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
