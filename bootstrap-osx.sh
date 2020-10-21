@@ -147,14 +147,8 @@ echo "Download plugins and plugin managers..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-
-git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/packages/zsh-history-substring-search
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/packages/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions ~/.zsh/packages/zsh-completions
 
 echo "Bootstrapping complete"
