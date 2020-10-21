@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git clone --bare git@github.com:zdrazil/my-preferences.git "$HOME/.cfg"
+git clone --bare git@github.com:zdrazil/my-preferences.git "$HOME/.cfg" --recurse-submodules
 
 function config() {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
