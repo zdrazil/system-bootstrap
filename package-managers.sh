@@ -21,7 +21,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     echo "Homebrew packages"
     brew bundle --verbose --file "$HOME/.config/packages/Brewfile"
-    brew bundle --verbose --file "$HOME/.config/packages/BrewCaskFile" 
 fi
 
 echo "Nix"
@@ -32,5 +31,4 @@ else
 fi
 echo "Nix packages"
 nix-env -i -f "$HOME/.config/packages/nix-packages.nix"
-
 
