@@ -4,8 +4,6 @@
 
 echo "Starting bootstrapping"
 
-echo "Adding package sources"
-
 echo "Adding packages sources and installing software"
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -17,7 +15,6 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 REPOSITORIES=(
 	'ppa:ubuntu-desktop/ubuntu-make'
 	'ppa:linrunner/tlp'
-	'ppa:papirus/papirus'
 )
 
 for repo in ${REPOSITORIES}; do
@@ -27,35 +24,8 @@ done
 # Update package database
 sudo apt update
 
-PACKAGES=(
-	arc-theme
-	calibre
-	chromium-browser
-	default-jre
-	emacs
-	filezilla
-	firefox
-	google-chrome-stable
-	handbrake
-	kdiff3
-	libreoffice
-	meld
-	mpv
-	papirus-icon-theme
-	steam
-	sublime-text
-	thunderbird
-	transmission
-	ubuntu-make
-	virtualbox
-	virtualbox-extension-pack
-	vlc
-	yacreader
-	zeal	
-)
-
 echo "Installing gui apps..."
-sudo apt install "${PACKAGES[@]}"
+xargs sudo apt-get install < "$HOME/.config/packages/ubuntu-gui-packages"
 
 echo "Cleaning up..."
 sudo apt-get cleanup
@@ -76,8 +46,5 @@ done
 
 # umake android
 umake web firefox-dev --lang en-US
-
-echo "Installing nvm..."
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
 echo "Bootstrapping complete"
