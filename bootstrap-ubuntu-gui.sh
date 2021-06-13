@@ -7,7 +7,7 @@ echo "Starting bootstrapping"
 bash ./bootstrap-ubuntu-cli.sh
 
 echo "Installing GUI packages..."
-xargs sudo apt-get install < "$HOME/.config/packages/ubuntu-gui-packages"
-xargs sudo snap install < "$HOME/.config/packages/snap-packages"
+sudo apt-get install "$(cat "$HOME/.config/packages/ubuntu-gui-packages")"
+snap install "$(cat "$HOME/.config/packages/snap-packages")"
 
 echo "Bootstrapping complete"

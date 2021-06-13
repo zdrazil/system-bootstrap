@@ -6,12 +6,12 @@ echo "Starting bootstrapping"
 
 sudo apt update
 
-sudo apt install git
+sudo apt install git curl xclip vim-gtk3 nodejs npm
 bash ./dotfiles.sh
-bash ./package-managers.sh
-
 echo "Installing packages..."
-xargs sudo apt-get install < "$HOME/.config/packages/ubuntu-packages"
+sudo apt-get install "$(cat "$HOME/.config/packages/ubuntu-packages")"
+
+bash ./package-managers.sh
 
 echo "Cleaning up..."
 sudo apt-get clean
