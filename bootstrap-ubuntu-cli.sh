@@ -9,7 +9,7 @@ sudo apt update
 sudo apt install git curl xclip vim-gtk3 nodejs npm
 bash ./dotfiles.sh
 echo "Installing packages..."
-sudo apt-get install "$(cat "$HOME/.config/packages/ubuntu-packages")"
+sudo apt-get install $(cat "$HOME/.config/packages/ubuntu-packages" | sed '/^#/d')
 
 bash ./package-managers.sh
 
